@@ -1,21 +1,14 @@
 import { useForm } from "react-hook-form";
 import Modal from "../../ui/Modal";
+import { useDispatch } from "react-redux";
+import { addTask } from "../../redux/features/tasks/taskSlice";
 
 const AddTaskModal = ({ isOpen, setIsOpen }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
 
-  //   handle reset
-  const handleReset = () => {
-    reset();
-    setIsOpen(false);
-  };
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(addTask(data));
     reset();
     setIsOpen(false);
   };
@@ -52,7 +45,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
                 id="deadline"
                 className="rounded-md"
                 placeholder="Enter your task deadline"
-                {...register("deadline")}
+                {...register("date")}
               />
             </div>
             <div className="flex flex-col gap-2 ">
@@ -60,7 +53,7 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
               <select
                 id="assignTo"
                 className="rounded-md"
-                {...register("assignTo")}
+                {...register("assignedTo")}
               >
                 <option value="Yasin Khan">Yasin Khan</option>
                 <option value="Rakib Mollah">Rakib Mollah</option>
@@ -80,9 +73,9 @@ const AddTaskModal = ({ isOpen, setIsOpen }) => {
                 className="rounded-md"
                 {...register("priority")}
               >
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
               </select>
             </div>
           </div>
