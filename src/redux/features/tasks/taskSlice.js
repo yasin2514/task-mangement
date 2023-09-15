@@ -3,13 +3,13 @@ const initialState = {
   tasks: [
     {
       id: 1,
-      status: 'pending',
-      title: 'Remove Button',
+      status: "pending",
+      title: "Remove Button",
       description:
-        'We need a remove button in our task card. Meke the button red and use Heroicon for tashbin icon.',
-      date: '2023-08-28',
-      assignedTo: 'Mir Hussain',
-      priority: 'high',
+        "We need a remove button in our task card. Meke the button red and use Heroicon for tashbin icon.",
+      date: "2023-08-28",
+      assignedTo: "Mir Hussain",
+      priority: "high",
     },
   ],
 };
@@ -29,10 +29,14 @@ const taskSlice = createSlice({
         });
       }
     },
-    removeTask: (state, payload) => {
+    removeTask: (state, { payload }) => {
       state.tasks.filter((task) => task.id !== payload.id);
+    },
+    updateStatus: (state, { payload }) => {
+      const targetTask = state.tasks.find((task) => task.id === payload);
+      targetTask.status = "running";
     },
   },
 });
-export const { addTask } = taskSlice.actions;
+export const { addTask, removeTask, updateStatus } = taskSlice.actions;
 export default taskSlice.reducer;
