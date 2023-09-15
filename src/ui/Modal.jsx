@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-const Modal = ({ setIsOpen, isOpen }) => {
+const Modal = ({ setIsOpen, isOpen,title,children }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
@@ -37,13 +37,10 @@ const Modal = ({ setIsOpen, isOpen }) => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Payment successful
+                    {title}
                   </Dialog.Title>
                   <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                      Your payment has been successfully submitted. We’ve sent
-                      you an email with all of the details of your order.
-                    </p>
+                    {children}
                   </div>
 
                   <div className="mt-4">
